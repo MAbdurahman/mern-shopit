@@ -44,7 +44,7 @@ exports.getSingleProduct = catchAsyncErrors( async (req, res, next) => {
 /*=========================================================
    update product -> /api/v1/admin/product/:id
 =========================================================*/
-exports.updateProduct = catchAsyncErrors( (req, res, next) => {
+exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 	let product = await Product.findById(req.params.id);
 
 	if (!product) {
@@ -56,7 +56,6 @@ exports.updateProduct = catchAsyncErrors( (req, res, next) => {
 		runValidators: true,
 		useFindAndModify: false,
 	});
-
 	res.status(200).json({
 		success: true,
 		product,
