@@ -1,0 +1,43 @@
+{
+  "name": "mern-shopit",
+  "version": "1.0.0",
+  "description": "MERN Stack E-Commerce Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server",
+    "seeder": "node backend/utils/seeder.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MAbdurahman/mern-shopit.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "ExpressJS",
+    "ReactJS",
+    "and",
+    "NodeJS"
+  ],
+  "author": "Mahdi Abdurrahman",
+  "license": "MIT",
+  "nodemonConfig": {
+    "delay": "2000"
+  },
+  "bugs": {
+    "url": "https://github.com/MAbdurahman/mern-shopit/issues"
+  },
+  "homepage": "https://github.com/MAbdurahman/mern-shopit#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.3",
+    "nodemailer": "^6.5.0",
+    "validator": "^13.5.2"
+  }
+}
