@@ -147,7 +147,6 @@ exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
 	});
 });
 
-// Update / Change password   =>  /api/v1/password/update
 /*============================================================
    update/change password -> /api/v1/password
 ===============================================================*/
@@ -164,7 +163,45 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 	await user.save();
 
 	sendToken(user, 200, res);
-	
+});
+
+/*============================================================
+   update user profile -> /api/v1/me/update
+===============================================================*/
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+	const newUserData = {
+		name: req.body.name,
+		email: req.body.email,
+	};
+
+	// Update avatar
+	/* 	if (req.body.avatar !== '') {
+		const user = await User.findById(req.user.id);
+
+		const image_id = user.avatar.public_id;
+		const res = await cloudinary.v2.uploader.destroy(image_id);
+
+		const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+			folder: 'avatars',
+			width: 150,
+			crop: 'scale',
+		});
+
+		newUserData.avatar = {
+			public_id: result.public_id,
+			url: result.secure_url,
+		};
+	} */
+
+	const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+		new: true,
+		runValidators: true,
+		useFindAndModify: false,
+	});
+
+	res.status(200).json({
+		success: true,
+	});
 });
 
 /*======================================================
@@ -179,5 +216,35 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 	res.status(200).json({
 		success: true,
 		message: 'Logged out',
+	});
+});
+
+/*============================================================
+   (admin) get all users -> /api/v1/admin/users
+===============================================================*/
+exports.allUsers = catchAsyncErrors(async (req, res, next) => {
+	const users = await User.find();
+
+	res.status(200).json({
+		success: true,
+		users,
+	});
+});
+
+/*============================================================
+   (admin) get user details -> /api/v1/admin/users/:id
+===============================================================*/
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findById(req.params.id);
+
+	if (!user) {
+		return next(
+			new ErrorHandler(`User is not found with id: ${req.params.id}`)
+		);
+	}
+
+	res.status(200).json({
+		success: true,
+		user,
 	});
 });
