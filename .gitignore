@@ -39,4 +39,5 @@ debug.log
 
 .env
 .eslintcache
+/.eslintcache
 config.env
