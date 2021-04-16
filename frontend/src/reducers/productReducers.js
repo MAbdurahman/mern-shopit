@@ -5,9 +5,11 @@ import {
    ALL_PRODUCTS_FAIL,
    CLEAR_ERRORS
 } from '../constants/productConstants'
-const productReducer =
-	((state = { products: [] }),
-	action => {
+
+
+export const productReducers =
+	(state = { products: [] },
+	action) => {
 		switch (action.type) {
 			case ALL_PRODUCTS_REQUEST:
 				return {
@@ -33,4 +35,4 @@ const productReducer =
 			default:
 				return state;
 		}
-	});
+	}
