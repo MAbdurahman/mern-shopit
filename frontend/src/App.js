@@ -7,7 +7,7 @@ import Home from './components/Home';
 function App() {
 	return (
 		<Router>
-			<div>
+			<div className='App'>
 				<Header />
 				<div className='container container-fluid'>
 					<Route exact path='/' component={Home} />

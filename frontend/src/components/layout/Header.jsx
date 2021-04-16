@@ -3,7 +3,7 @@ import React from 'react'
 export default function Header() {
    return (
 		<>
-			<nav className='navbar row'>
+			<nav className='navbar row sticky-top'>
 				<div className='col-12 col-md-3'>
 					<div className='navbar-brand'>
 						<img src='/images/logo.png' alt='logo'/>
@@ -33,7 +33,7 @@ export default function Header() {
 
 					<span id='cart' className='ml-3'>
 						Cart
-					</span>
+					</span>&nbsp;
 					<span className='ml-1' id='cart_count'>
 						2
 					</span>
