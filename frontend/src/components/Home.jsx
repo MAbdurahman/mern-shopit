@@ -1,8 +1,10 @@
 import React from 'react';
+import MetaData from './layout/MetaData';
 
 export default function Home() {
 	return (
 		<>
+      <MetaData title={'Best Products Online'}/>
 			<h1 id='products_heading'>Latest Products</h1>
 			<section id='products' className='container mt-5'>
 				<div className='row'>
