@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Home() {
 	return (
-		<div className='container container-fluid'>
+		<>
 			<h1 id='products_heading'>Latest Products</h1>
 			<section id='products' className='container mt-5'>
 				<div className='row'>
@@ -34,6 +34,6 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
-		</div>
+		</>
 	);
 }
