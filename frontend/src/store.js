@@ -4,13 +4,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { 
-   productReducers
+   productReducers,
+   productDetailsReducer
 } from './reducers/productReducers'
 
 
 //**************** variables ****************//
 const reducers = combineReducers({
-	products: productReducers
+	products: productReducers,
+   productDetails: productDetailsReducer
 });
 const middleware = [thunk];
 let initialState = {
