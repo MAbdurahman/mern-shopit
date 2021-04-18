@@ -1,3 +1,21 @@
+*,
+*::after,
+*::before {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+*::-moz-focus-inner {
+  border: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
 html,
 body {
   font-family: 'Amazon Ember';

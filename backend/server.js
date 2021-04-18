@@ -22,7 +22,7 @@ connectDatabase();
 //**************** app listening ****************//
 const server = app.listen(PORT, () => {
    console.log(
-		`The server is listening at - http://localhost:${PORT} in ${NODE_ENV} mode🔥`
+		`The server is listening at - http://127.0.0.1:${PORT} in ${NODE_ENV} mode🔥`
 	);
 });
 //**************** handling unhandled promise rejection ****************//

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Card, Carousel, } from 'react-bootstrap';
+import { Carousel, } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { getProductDetails, clearErrors } from '../../actions/productActions';
@@ -28,9 +28,10 @@ export default function ProductDetails({ match }) {
 				<Loader />
 			) : (
 				<Fragment>
+					<MetaData title={product.name} />
 					<div className='row f-flex justify-content-around'>
 						<div className='col-12 col-lg-5 img-fluid' id='product_image'>
-							<Carousel pause='hover' className=''>
+							<Carousel pause='hover' controls={false} indicators={false}>
 								{product.images &&
 									product.images.map(image => (
 										<Carousel.Item key={image.public_id}>
