@@ -23,14 +23,19 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
 	const productsCount = await Product.countDocuments();
 	const apiFeatures = new APIFeatures(Product.find(), req.query)
 		.search()
-		.filter()
-		.pagination(resPerPage);
-	const products = await apiFeatures.query;
+		.filter();
+
+	let products = await apiFeatures.query;
+	let filteredProductsCount = products.length;
+
+	apiFeatures.pagination(resPerPage);
+	products = await apiFeatures.query;
 
 	res.status(200).json({
 		success: true,
 		productsCount,
 		resPerPage,
+		filteredProductsCount,
 		products,
 	});
 });
@@ -150,7 +155,6 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
 ===============================================================*/
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 	const product = await Product.findById(req.query.productId);
-
 
 	const reviews = product.reviews.filter(
 		review => review._id.toString() !== req.query.id.toString()
