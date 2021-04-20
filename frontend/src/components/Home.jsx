@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { getProducts } from '../actions/productActions';
 
-export default function Home() {
+export default function Home({match}) {
 	//**************** state values ****************//
 	const dispatch = useDispatch();
 	const alert = useAlert();
@@ -16,15 +16,16 @@ export default function Home() {
 	const { error, loading, products, productsCount, resPerPage } = useSelector(
 		state => state.products
 	);
+	const keyword = match.params.keyword;
 
 	//***************** functions ***************************//
 	useEffect(() => {
 		if (error) {
 			return alert.error(error);
 		}
-		dispatch(getProducts(currentPage));
+		dispatch(getProducts(keyword, currentPage));
 
-	}, [dispatch, alert, error, currentPage ]);
+	}, [dispatch, alert, error, keyword, currentPage ]);
 
 	function setCurrentPageNo(pageNumber) {
 		setCurrentPage(pageNumber);
