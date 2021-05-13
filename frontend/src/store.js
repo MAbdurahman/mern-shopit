@@ -8,11 +8,17 @@ import {
    productDetailsReducer
 } from './reducers/productReducers'
 
+import {
+   authReducer
+}
+from './reducers/userReducers'
+
 
 //**************** variables ****************//
 const reducers = combineReducers({
 	products: productReducers,
-   productDetails: productDetailsReducer
+   productDetails: productDetailsReducer, 
+   auth: authReducer
 });
 const middleware = [thunk];
 let initialState = {

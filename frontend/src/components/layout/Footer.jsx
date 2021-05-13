@@ -5,7 +5,7 @@ export default function Footer() {
 		<>
 			<footer className='py-1'>
 				<p className='text-center mt-1'>
-					&copy;&nbsp;2021 ShoppingCart, All Rights Reserved
+					&copy;&nbsp;2021 ShopIT, All Rights Reserved
 				</p>
 			</footer>
 		</>
