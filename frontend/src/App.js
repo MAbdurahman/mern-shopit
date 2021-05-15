@@ -9,7 +9,7 @@ import Register from './components/user/Register';
 
 import { loadUser } from './actions/userActions';
 import store from './store';
-import axios from 'axios';
+// import axios from 'axios';
 
 function App() {
 	//**************** functions ****************//
