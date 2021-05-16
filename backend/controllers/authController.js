@@ -27,7 +27,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 		avatar: {
 			public_id: result.public_id,
 			url: result.secure_url,
-		}
+		},
 	});
 
 	sendToken(user, 200, res);
@@ -77,9 +77,10 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 	await user.save({ validateBeforeSave: false });
 
 	//**************** create reset password****************//
-	const resetUrl = `${req.protocol}://${req.get(
+	/* 	const resetUrl = `${req.protocol}://${req.get(
 		'host'
-	)}/password/reset/${resetToken}`;
+	)}/password/reset/${resetToken}`; */
+	const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
 	const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
 
@@ -183,7 +184,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 	};
 
 	// Update avatar
-		if (req.body.avatar !== '') {
+	if (req.body.avatar !== '') {
 		const user = await User.findById(req.user.id);
 
 		const image_id = user.avatar.public_id;
