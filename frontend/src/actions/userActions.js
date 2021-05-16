@@ -15,6 +15,12 @@ import {
 	UPDATE_PASSWORD_REQUEST,
 	UPDATE_PASSWORD_SUCCESS,
 	UPDATE_PASSWORD_FAIL,
+	FORGOT_PASSWORD_REQUEST,
+	FORGOT_PASSWORD_SUCCESS,
+	FORGOT_PASSWORD_FAIL,
+	NEW_PASSWORD_REQUEST,
+	NEW_PASSWORD_SUCCESS,
+	NEW_PASSWORD_FAIL,
 	LOGOUT_SUCCESS,
 	LOGOUT_FAIL,
 	CLEAR_ERRORS,
@@ -86,6 +92,7 @@ export const loadUser = () => async dispatch => {
 		});
 	}
 };
+
 //**************** Logout User ****************//
 export const logout = () => async dispatch => {
 	try {
@@ -101,6 +108,7 @@ export const logout = () => async dispatch => {
 		});
 	}
 };
+
 //**************** Update Profile ****************//
 export const updateProfile = userData => async dispatch => {
 	try {
@@ -126,7 +134,7 @@ export const updateProfile = userData => async dispatch => {
 	}
 };
 
-	//**************** Update Password ****************//
+//**************** Update Password ****************//
 	export const updatePassword = passwords => async dispatch => {
 		try {
 			dispatch({ type: UPDATE_PASSWORD_REQUEST });
@@ -154,7 +162,35 @@ export const updateProfile = userData => async dispatch => {
 			});
 		}
 	};
+	
+//**************** Forgot Password ****************//
+	export const forgotPassword = email => async dispatch => {
+		try {
+			dispatch({ type: FORGOT_PASSWORD_REQUEST });
 
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+
+			const { data } = await axios.post(
+				'/api/v1/password/forgot',
+				email,
+				config
+			);
+
+			dispatch({
+				type: FORGOT_PASSWORD_SUCCESS,
+				payload: data.message,
+			});
+		} catch (error) {
+			dispatch({
+				type: FORGOT_PASSWORD_FAIL,
+				payload: error.response.data.message,
+			});
+		}
+	};
 
 
 

@@ -10,7 +10,8 @@ import {
 
 import {
    authReducer,
-   userReducer
+   userReducer,
+   forgotPasswordReducer
 }
 from './reducers/userReducers'
 
@@ -21,6 +22,7 @@ const reducers = combineReducers({
 	productDetails: productDetailsReducer,
 	auth: authReducer,
 	user: userReducer,
+	forgotPassword: forgotPasswordReducer
 });
 const middleware = [thunk];
 let initialState = {
