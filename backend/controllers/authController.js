@@ -183,7 +183,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 	};
 
 	// Update avatar
-	/* 	if (req.body.avatar !== '') {
+		if (req.body.avatar !== '') {
 		const user = await User.findById(req.user.id);
 
 		const image_id = user.avatar.public_id;
@@ -199,7 +199,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 			public_id: result.public_id,
 			url: result.secure_url,
 		};
-	} */
+	}
 
 	const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
 		new: true,
