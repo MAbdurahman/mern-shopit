@@ -9,7 +9,8 @@ import {
 } from './reducers/productReducers'
 
 import {
-   authReducer
+   authReducer,
+   userReducer
 }
 from './reducers/userReducers'
 
@@ -17,8 +18,9 @@ from './reducers/userReducers'
 //**************** variables ****************//
 const reducers = combineReducers({
 	products: productReducers,
-   productDetails: productDetailsReducer, 
-   auth: authReducer
+	productDetails: productDetailsReducer,
+	auth: authReducer,
+	user: userReducer,
 });
 const middleware = [thunk];
 let initialState = {
