@@ -13,6 +13,8 @@ import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 import ProtectedRoute from './components/route/ProtectedRoute';
 
+import Cart from './components/cart/Cart';
+
 import { loadUser } from './actions/userActions';
 import store from './store';
 // import axios from 'axios';
@@ -33,13 +35,31 @@ function App() {
 					<Route path='/search/:keyword' component={Home} />
 					<Route exact path='/product/:id' component={ProductDetails} />
 
+					<Route path='/cart' component={Cart} exact />
+
 					<Route path='/login' component={Login} />
 					<Route path='/register' component={Register} />
-					<Route path='/password/forgot' component={ForgotPassword} exact />
-					<Route path='/password/reset/:token' component={NewPassword} exact />
+					<Route
+						path='/password/forgot'
+						component={ForgotPassword}
+						exact
+					/>
+					<Route
+						path='/password/reset/:token'
+						component={NewPassword}
+						exact
+					/>
 					<ProtectedRoute path='/me' component={Profile} exact />
-					<ProtectedRoute path='/me/update' component={UpdateProfile} exact />
-					<ProtectedRoute path='/password/update' component={UpdatePassword} exact />
+					<ProtectedRoute
+						path='/me/update'
+						component={UpdateProfile}
+						exact
+					/>
+					<ProtectedRoute
+						path='/password/update'
+						component={UpdatePassword}
+						exact
+					/>
 				</div>
 				<Footer />
 			</div>
