@@ -3,6 +3,7 @@ import { Carousel } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { getProductDetails, clearErrors } from '../../actions/productActions';
+import { addItemToCart } from '../../actions/cartActions';
 import Loader from '../layout/Loader';
 import MetaData from './../layout/MetaData';
 
@@ -23,6 +24,11 @@ export default function ProductDetails({ match }) {
 			dispatch(clearErrors());
 		}
 	}, [dispatch, alert, error, match.params.id]);
+
+	const addToCart = () => {
+		dispatch(addItemToCart(match.params.id, quantity));
+		alert.success('Item Added to Cart');
+	};
 
 	const increaseQty = () => {
 		const count = document.querySelector('.count');
@@ -114,6 +120,8 @@ export default function ProductDetails({ match }) {
 								type='button'
 								id='cart_btn'
 								className='btn btn-primary d-inline ml-4'
+								disabled={product.stock === 0}
+								onClick={addToCart}
 							>
 								Add to Cart
 							</button>
