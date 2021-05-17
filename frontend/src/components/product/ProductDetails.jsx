@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Carousel, } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { getProductDetails, clearErrors } from '../../actions/productActions';
@@ -9,7 +9,8 @@ import MetaData from './../layout/MetaData';
 export default function ProductDetails({ match }) {
 	//**************** variables ****************//
 	const dispatch = useDispatch();
-   const alert = useAlert();
+	const alert = useAlert();
+	const [quantity, setQuantity] = useState(1);
 	const { error, loading, product } = useSelector(
 		state => state.productDetails
 	);
@@ -22,6 +23,25 @@ export default function ProductDetails({ match }) {
 			dispatch(clearErrors());
 		}
 	}, [dispatch, alert, error, match.params.id]);
+
+	const increaseQty = () => {
+		const count = document.querySelector('.count');
+
+		if (count.valueAsNumber >= product.stock) return;
+
+		const qty = count.valueAsNumber + 1;
+		setQuantity(qty);
+	};
+
+	const decreaseQty = () => {
+		const count = document.querySelector('.count');
+
+		if (count.valueAsNumber <= 1) return;
+
+		const qty = count.valueAsNumber - 1;
+		setQuantity(qty);
+	};
+
 	return (
 		<Fragment>
 			{loading ? (
@@ -31,7 +51,11 @@ export default function ProductDetails({ match }) {
 					<MetaData title={product.name} />
 					<div className='row f-flex justify-content-around'>
 						<div className='col-12 col-lg-5 img-fluid' id='product_image'>
-							<Carousel pause='hover' controls={false} indicators={false}>
+							<Carousel
+								pause='hover'
+								controls={false}
+								indicators={false}
+							>
 								{product.images &&
 									product.images.map(image => (
 										<Carousel.Item key={image.public_id}>
@@ -43,7 +67,6 @@ export default function ProductDetails({ match }) {
 										</Carousel.Item>
 									))}
 							</Carousel>
-         
 						</div>
 
 						<div className='col-12 col-lg-5 mt-5'>
@@ -66,16 +89,26 @@ export default function ProductDetails({ match }) {
 
 							<p id='product_price'>${product.price}</p>
 							<div className='stockCounter d-inline'>
-								<span className='btn btn-danger minus'>-</span>
+								<span
+									className='btn btn-danger minus'
+									onClick={decreaseQty}
+								>
+									-
+								</span>
 
 								<input
 									type='number'
 									className='form-control count d-inline'
-									value='1'
+									value={quantity}
 									readOnly
 								/>
 
-								<span className='btn btn-primary plus'>+</span>
+								<span
+									className='btn btn-primary plus'
+									onClick={increaseQty}
+								>
+									+
+								</span>
 							</div>
 							<button
 								type='button'
