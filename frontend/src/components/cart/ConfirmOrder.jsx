@@ -63,7 +63,7 @@ export default function ConfirmOrder({ history }) {
 									<div className='col-4 col-lg-2'>
 										<img
 											src={item.image}
-											alt='Laptop'
+											alt='Item'
 											height='45'
 											width='65'
 										/>

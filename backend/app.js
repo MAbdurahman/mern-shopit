@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cloudinary = require('cloudinary');
 const fileUpload = require('express-fileupload');
+//**************** setting up config file ****************//
+if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'backend/config/config.env' })
 //**************** variables ****************//
 const app = express();
 
