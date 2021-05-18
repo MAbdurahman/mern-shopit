@@ -18,6 +18,7 @@ import Cart from './components/cart/Cart';
 import Shipping from './components/cart/Shipping';
 import ConfirmOrder from './components/cart/ConfirmOrder';
 import Payment from './components/cart/Payment';
+import OrderSuccess from './components/cart/OrderSuccess';
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
@@ -59,7 +60,7 @@ function App() {
 					<Route path='/cart' component={Cart} exact />
 					<ProtectedRoute path='/shipping' component={Shipping} />
 					<ProtectedRoute path='/confirm' component={ConfirmOrder} exact />
-
+					<ProtectedRoute path='/success' component={OrderSuccess} />
 					{stripeApiKey && (
 						<Elements stripe={loadStripe(stripeApiKey)}>
 							<ProtectedRoute path='/payment' component={Payment} />

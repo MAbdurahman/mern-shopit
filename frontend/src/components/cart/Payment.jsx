@@ -5,6 +5,7 @@ import CheckoutSteps from './CheckoutSteps';
 
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
+import { createOrder, clearErrors } from '../../actions/orderActions';
 import {
 	useStripe,
 	useElements,
@@ -34,6 +35,7 @@ export default function Payment({ history }) {
 
 	const { user } = useSelector(state => state.auth);
 	const { cartItems, shippingInfo } = useSelector(state => state.cart);
+	const { error } = useSelector(state => state.newOrder);
 	const order = {
 		orderItems: cartItems,
 		shippingInfo,
@@ -52,11 +54,11 @@ export default function Payment({ history }) {
 	};
 	//**************** functions ****************//
 	useEffect(() => {
-		/* if (error) {
+		if (error) {
 			alert.error(error);
 			dispatch(clearErrors());
-		} */
-	}, []);
+		}
+	}, [dispatch, alert, error]);
 
 	const submitHandler = async e => {
 		e.preventDefault();
@@ -99,7 +101,7 @@ export default function Payment({ history }) {
 						status: result.paymentIntent.status,
 					};
 
-					// dispatch(createOrder(order));
+					dispatch(createOrder(order));
 
 					history.push('/success');
 				} else {

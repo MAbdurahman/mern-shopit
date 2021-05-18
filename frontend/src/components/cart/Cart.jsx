@@ -160,7 +160,7 @@ export default function Cart({ history }) {
 									className='btn btn-primary btn-block'
 									onClick={checkoutHandler}
 								>
-									Check out
+									Checkout
 								</button>
 							</div>
 						</div>
