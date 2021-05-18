@@ -17,11 +17,13 @@ app.use(fileUpload());
 //**************** import all routes ****************//
 const products = require('./routes/product');
 const auth = require('./routes/auth');
+const payment = require('./routes/payment');
 const order = require('./routes/order');
 
 //**************** app routes ****************//
 app.use('/api/v1', products);
 app.use('/api/v1', auth);
+app.use('/api/v1', payment);
 app.use('/api/v1', order);
 
 //**************** handle errors middleware ****************//
