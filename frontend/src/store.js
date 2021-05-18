@@ -17,7 +17,13 @@ from './reducers/userReducers'
 
 import { cartReducer } from './reducers/cartReducers';
 
-
+import {
+	newOrderReducer,
+	myOrdersReducer,
+	orderDetailsReducer,
+	allOrdersReducer,
+	orderReducer,
+} from './reducers/orderReducers';
 //**************** variables ****************//
 const reducers = combineReducers({
 	products: productReducers,
@@ -25,7 +31,12 @@ const reducers = combineReducers({
 	auth: authReducer,
 	user: userReducer,
 	forgotPassword: forgotPasswordReducer,
-	cart: cartReducer
+	cart: cartReducer,
+	newOrder: newOrderReducer,
+	myOrders: myOrdersReducer,
+	allOrders: allOrdersReducer,
+	orderDetails: orderDetailsReducer,
+	order: orderReducer
 });
 const middleware = [thunk];
 let initialState = {
