@@ -20,6 +20,8 @@ import ConfirmOrder from './components/cart/ConfirmOrder';
 import Payment from './components/cart/Payment';
 import OrderSuccess from './components/cart/OrderSuccess';
 
+import ListOrders from './components/order/ListOrders';
+
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
 import { useSelector } from 'react-redux';
@@ -90,6 +92,7 @@ function App() {
 						component={UpdatePassword}
 						exact
 					/>
+					<ProtectedRoute path='/orders/me' component={ListOrders} exact />
 				</div>
 				<Footer />
 			</div>
