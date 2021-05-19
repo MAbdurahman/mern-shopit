@@ -57,6 +57,10 @@ nav {
   width: 90%;
   margin-right: 35%;
 }
+#header-logo {
+  width: 166px;
+  margin-left: 35px;
+}
 
 #search_field {
   height: 2.4rem;

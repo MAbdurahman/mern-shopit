@@ -19,7 +19,6 @@ exports.processPayment = catchAsyncErrors(async (req, res, next) => {
 	});
 });
 
-
 /*===============================================================
    Send stripe API Key  =>  /api/v1/stripeapikey
 ==================================================================*/
