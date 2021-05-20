@@ -5,7 +5,8 @@ import thunk from 'redux-thunk';
 
 import { 
    productReducers,
-   productDetailsReducer
+   productDetailsReducer,
+	newReviewReducer
 } from './reducers/productReducers'
 
 import {
@@ -36,7 +37,8 @@ const reducers = combineReducers({
 	myOrders: myOrdersReducer,
 	allOrders: allOrdersReducer,
 	orderDetails: orderDetailsReducer,
-	order: orderReducer
+	order: orderReducer,
+	newReview: newReviewReducer,
 });
 const middleware = [thunk];
 let initialState = {

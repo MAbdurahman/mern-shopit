@@ -53,7 +53,7 @@ export default function OrderDetails({ match }) {
 						<div className='col-12 col-lg-8 mt-5 order-details'>
 							<h2 className='my-5'>Order # {order._id}</h2>
 
-							<h4 className='mb-4'>Shipping Info</h4>
+							<h4 className='mb-4'>Shipping Information</h4>
 							<p>
 								<b>Name:</b> {user && user.name}
 							</p>
@@ -61,8 +61,7 @@ export default function OrderDetails({ match }) {
 								<b>Phone:</b> {shippingInfo && shippingInfo.phoneNo}
 							</p>
 							<p className='mb-4'>
-								<b>Address:</b>
-								{shippingDetails}
+								<b>Address:</b> {shippingDetails}
 							</p>
 							<p>
 								<b>Amount:</b> ${totalPrice}
