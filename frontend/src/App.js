@@ -23,6 +23,9 @@ import OrderSuccess from './components/cart/OrderSuccess';
 import ListOrders from './components/order/ListOrders';
 import OrderDetails from './components/order/OrderDetails';
 
+//**************** admin imports ****************//
+import Dashboard from './components/admin/Dashboard';
+
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
 import { useSelector } from 'react-redux';
@@ -99,7 +102,14 @@ function App() {
 						component={OrderDetails}
 						exact
 					/>
+
 				</div>
+					<ProtectedRoute
+						path='/dashboard'
+						isAdmin={true}
+						component={Dashboard}
+						exact
+					/>
 				<Footer />
 			</div>
 		</Router>
