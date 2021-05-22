@@ -3,12 +3,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import { 
-   productReducers,
-   productDetailsReducer,
+import {
+	productsReducer,
+	productDetailsReducer,
 	newReviewReducer,
-	newProductReducer
-} from './reducers/productReducers'
+	newProductReducer,
+	productReducer
+} from './reducers/productReducers';
 
 import {
    authReducer,
@@ -28,9 +29,10 @@ import {
 } from './reducers/orderReducers';
 //**************** variables ****************//
 const reducers = combineReducers({
-	products: productReducers,
+	products: productsReducer,
 	productDetails: productDetailsReducer,
 	newProduct: newProductReducer,
+	product: productReducer,
 	auth: authReducer,
 	user: userReducer,
 	forgotPassword: forgotPasswordReducer,

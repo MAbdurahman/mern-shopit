@@ -10,8 +10,10 @@ import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	getAdminProducts,
+	deleteProduct,
 	clearErrors,
 } from '../../actions/productActions';
+import { DELETE_PRODUCT_RESET } from '../../constants/productConstants';
 
 export default function ProductsList({ history }) {
 	//**************** variables ****************//
@@ -19,9 +21,7 @@ export default function ProductsList({ history }) {
 	const dispatch = useDispatch();
 
 	const { loading, error, products } = useSelector(state => state.products);
-	/* 			const { error: deleteError, isDeleted } = useSelector(
-				state => state.product
-			); */
+	const { error: deleteError, isDeleted } = useSelector(state => state.product);
 
 	useEffect(() => {
 		dispatch(getAdminProducts());
@@ -31,17 +31,17 @@ export default function ProductsList({ history }) {
 			dispatch(clearErrors());
 		}
 
-/* 		if (deleteError) {
+		if (deleteError) {
 			alert.error(deleteError);
 			dispatch(clearErrors());
-		} */
+		}
 
-/* 		if (isDeleted) {
-			alert.success('Product deleted successfully');
+		if (isDeleted) {
+			alert.success('Product deleted successfully👍');
 			history.push('/admin/products');
 			dispatch({ type: DELETE_PRODUCT_RESET });
-		} */
-	}, [dispatch, alert, error, history]);
+		}
+	}, [dispatch, alert, error, deleteError, isDeleted, history]);
 
 	const setProducts = () => {
 		const data = {
@@ -90,7 +90,7 @@ export default function ProductsList({ history }) {
 						</Link>
 						<button
 							className='btn btn-danger py-1 px-2 ml-2'
-							/* onClick={() => deleteProductHandler(product._id)} */
+							onClick={() => deleteProductHandler(product._id)}
 						>
 							<i className='fa fa-trash'></i>
 						</button>
@@ -102,9 +102,11 @@ export default function ProductsList({ history }) {
 		return data;
 	};
 
-	/* 			const deleteProductHandler = id => {
-				dispatch(deleteProduct(id));
-			}; */
+	const deleteProductHandler = id => {
+		dispatch(deleteProduct(id));
+
+	};
+
 	return (
 		<Fragment>
 			<MetaData title={'All Products'} />

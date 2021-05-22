@@ -27,6 +27,7 @@ import OrderDetails from './components/order/OrderDetails';
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
 import NewProduct from './components/admin/NewProduct';
+import UpdateProduct from './components/admin/UpdateProduct';
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
@@ -123,6 +124,12 @@ function App() {
 					path='/admin/product'
 					isAdmin={true}
 					component={NewProduct}
+					exact
+				/>
+				<ProtectedRoute
+					path='/admin/product/:id'
+					isAdmin={true}
+					component={UpdateProduct}
 					exact
 				/>
 				{!loading && (!isAuthenticated || user.role !== 'admin') && (

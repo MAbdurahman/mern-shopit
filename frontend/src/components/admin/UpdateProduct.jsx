@@ -5,10 +5,14 @@ import Sidebar from './Sidebar';
 
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { newProduct, clearErrors } from '../../actions/productActions';
-import { NEW_PRODUCT_RESET } from '../../constants/productConstants';
+import {
+	updateProduct,
+	getProductDetails,
+	clearErrors,
+} from '../../actions/productActions';
+import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants';
 
-export default function NewProduct({ history }) {
+export default function UpdateProduct({ match, history }) {
 	//**************** variables ****************//
 	const [name, setName] = useState('');
 	const [price, setPrice] = useState(0);
@@ -17,7 +21,9 @@ export default function NewProduct({ history }) {
 	const [stock, setStock] = useState(0);
 	const [seller, setSeller] = useState('');
 	const [images, setImages] = useState([]);
+	const [oldImages, setOldImages] = useState([]);
 	const [imagesPreview, setImagesPreview] = useState([]);
+
 	const categories = [
 		'Electronics',
 		'Cameras',
@@ -36,20 +42,51 @@ export default function NewProduct({ history }) {
 	const alert = useAlert();
 	const dispatch = useDispatch();
 
-	const { loading, error, success } = useSelector(state => state.newProduct);
+	const { error, product } = useSelector(state => state.productDetails);
+	const { loading, error: updateError, isUpdated } = useSelector(
+		state => state.product
+	);
+
+	const productId = match.params.id;
 	//**************** functions ****************//
 	useEffect(() => {
+		if (product && product._id !== productId) {
+			dispatch(getProductDetails(productId));
+		} else {
+			setName(product.name);
+			setPrice(product.price);
+			setDescription(product.description);
+			setCategory(product.category);
+			setSeller(product.seller);
+			setStock(product.stock);
+			setOldImages(product.images);
+		}
+
 		if (error) {
 			alert.error(error);
 			dispatch(clearErrors());
 		}
 
-		if (success) {
-			history.push('/admin/products');
-			alert.success('Product created successfully❤');
-			dispatch({ type: NEW_PRODUCT_RESET });
+		if (updateError) {
+			alert.error(updateError);
+			dispatch(clearErrors());
 		}
-	}, [dispatch, alert, error, success, history]);
+
+		if (isUpdated) {
+			history.push('/admin/products');
+			alert.success('Product updated successfully');
+			dispatch({ type: UPDATE_PRODUCT_RESET });
+		}
+	}, [
+		dispatch,
+		alert,
+		error,
+		isUpdated,
+		history,
+		updateError,
+		product,
+		productId,
+	]);
 
 	const submitHandler = e => {
 		e.preventDefault();
@@ -66,7 +103,7 @@ export default function NewProduct({ history }) {
 			formData.append('images', image);
 		});
 
-		dispatch(newProduct(formData));
+		dispatch(updateProduct(product._id, formData));
 	};
 
 	const onChange = e => {
@@ -74,6 +111,7 @@ export default function NewProduct({ history }) {
 
 		setImagesPreview([]);
 		setImages([]);
+		setOldImages([]);
 
 		files.forEach(file => {
 			const reader = new FileReader();
@@ -88,9 +126,10 @@ export default function NewProduct({ history }) {
 			reader.readAsDataURL(file);
 		});
 	};
+
 	return (
 		<Fragment>
-			<MetaData title={'New Product'} />
+			<MetaData title={'Update Product'} />
 			<div className='row'>
 				<div className='col-12 col-md-2'>
 					<Sidebar />
@@ -104,7 +143,7 @@ export default function NewProduct({ history }) {
 								onSubmit={submitHandler}
 								encType='multipart/form-data'
 							>
-								<h2 className='mb-4'>New Product</h2>
+								<h2 className='mb-4'>Update Product</h2>
 
 								<div className='form-group'>
 									<label htmlFor='name_field'>Name</label>
@@ -198,6 +237,18 @@ export default function NewProduct({ history }) {
 										</label>
 									</div>
 
+									{oldImages &&
+										oldImages.map(img => (
+											<img
+												key={img}
+												src={img.url}
+												alt={img.url}
+												className='mt-3 mr-2'
+												width='55'
+												height='52'
+											/>
+										))}
+
 									{imagesPreview.map(img => (
 										<img
 											src={img}
@@ -216,7 +267,7 @@ export default function NewProduct({ history }) {
 									className='btn btn-block py-3'
 									disabled={loading ? true : false}
 								>
-									CREATE
+									UPDATE
 								</button>
 							</form>
 						</div>
