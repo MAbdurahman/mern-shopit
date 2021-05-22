@@ -3,7 +3,7 @@ import React from 'react';
 export default function ListReviews({ reviews }) {
    return (
 		<div className='reviews w-75'>
-			<h3>Other Reviews:</h3>
+			<h3>Customer Reviews:</h3>
 			<hr />
 			{reviews &&
 				reviews.map(review => (

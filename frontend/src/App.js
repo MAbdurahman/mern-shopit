@@ -25,6 +25,8 @@ import OrderDetails from './components/order/OrderDetails';
 
 //**************** admin imports ****************//
 import Dashboard from './components/admin/Dashboard';
+import ProductsList from './components/admin/ProductsList';
+import NewProduct from './components/admin/NewProduct';
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
@@ -32,15 +34,17 @@ import { useSelector } from 'react-redux';
 import store from './store';
 import axios from 'axios';
 
+//**************** payment imports ****************//
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+
 
 
 
 function App() {
 	//**************** variables ****************//
 	const [stripeApiKey, setStripeApiKey] = useState('');
-	// const { user, isAuthenticated, loading } = useSelector(state => state.auth);
+	const { user, isAuthenticated, loading } = useSelector(state => state.auth);
 	//**************** functions ****************//
 	useEffect(() => {
 		store.dispatch(loadUser());
@@ -102,15 +106,28 @@ function App() {
 						component={OrderDetails}
 						exact
 					/>
-
 				</div>
-					<ProtectedRoute
-						path='/dashboard'
-						isAdmin={true}
-						component={Dashboard}
-						exact
-					/>
-				<Footer />
+				<ProtectedRoute
+					path='/dashboard'
+					isAdmin={true}
+					component={Dashboard}
+					exact
+				/>
+				<ProtectedRoute
+					path='/admin/products'
+					isAdmin={true}
+					component={ProductsList}
+					exact
+				/>
+				<ProtectedRoute
+					path='/admin/product'
+					isAdmin={true}
+					component={NewProduct}
+					exact
+				/>
+				{!loading && (!isAuthenticated || user.role !== 'admin') && (
+					<Footer />
+				)}
 			</div>
 		</Router>
 	);

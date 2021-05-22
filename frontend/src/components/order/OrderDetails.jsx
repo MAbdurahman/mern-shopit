@@ -103,7 +103,7 @@ export default function OrderDetails({ match }) {
 											</div>
 
 											<div className='col-5 col-lg-5'>
-												<Link to={`/products/${item.product}`}>
+												<Link to={`/product/${item.product}`}>
 													{item.name}
 												</Link>
 											</div>
