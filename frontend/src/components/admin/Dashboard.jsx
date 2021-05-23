@@ -7,11 +7,14 @@ import Sidebar from './Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getAdminProducts } from '../../actions/productActions';
+import { allOrders } from '../../actions/orderActions';
 
 export default function Dashboard() {
 	//**************** variables ****************//
 	const dispatch = useDispatch();
 	const { products } = useSelector(state => state.products);
+	const { orders, totalAmount, loading } = useSelector(state => state.allOrders);
+	
 	//**************** functions ****************//
 
 	let outOfStock = 0;
@@ -23,6 +26,8 @@ export default function Dashboard() {
 
 	useEffect(() => {
 		dispatch(getAdminProducts());
+		dispatch(allOrders());
+
 	}, [dispatch]);
 	return (
 		<Fragment>
@@ -45,7 +50,10 @@ export default function Dashboard() {
 										<div className='card-body'>
 											<div className='text-center card-font-size'>
 												Total Amount
-												<br /> <b>$5000.00</b>
+												<br />{' '}
+												<b>
+													${totalAmount && totalAmount.toFixed(2)}
+												</b>
 											</div>
 										</div>
 									</div>
@@ -79,7 +87,7 @@ export default function Dashboard() {
 									<div className='card text-white bg-danger o-hidden h-100'>
 										<div className='card-body'>
 											<div className='text-center card-font-size'>
-												Orders
+												Orders<br /> <b>{orders && orders.length}</b>
 											</div>
 										</div>
 										<Link
@@ -101,7 +109,6 @@ export default function Dashboard() {
 										<div className='card-body'>
 											<div className='text-center card-font-size'>
 												Users
-									
 											</div>
 										</div>
 										<Link
