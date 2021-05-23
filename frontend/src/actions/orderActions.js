@@ -136,7 +136,7 @@ export const updateOrder = (id, orderData) => async dispatch => {
 	}
 };
 
-// Delete order
+//**************** delete order (admin) ****************//
 export const deleteOrder = id => async dispatch => {
 	try {
 		dispatch({ type: DELETE_ORDER_REQUEST });
@@ -152,6 +152,7 @@ export const deleteOrder = id => async dispatch => {
 			type: DELETE_ORDER_FAIL,
 			payload: error.response.data.message,
 		});
+		
 	}
 };
 

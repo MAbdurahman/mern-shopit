@@ -32,9 +32,10 @@ export default function OrderList({ history }) {
 		}
 
 		if (isDeleted) {
-			alert.success('Order deleted successfully');
+			alert.success('Order deleted successfully👍');
 			history.push('/admin/orders');
 			dispatch({ type: DELETE_ORDER_RESET });
+
 		}
 	}, [dispatch, alert, error, isDeleted, history]);
 
