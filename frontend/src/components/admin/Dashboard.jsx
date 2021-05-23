@@ -87,7 +87,8 @@ export default function Dashboard() {
 									<div className='card text-white bg-danger o-hidden h-100'>
 										<div className='card-body'>
 											<div className='text-center card-font-size'>
-												Orders<br /> <b>{orders && orders.length}</b>
+												Orders
+												<br /> <b>{orders && orders.length}</b>
 											</div>
 										</div>
 										<Link
@@ -130,6 +131,7 @@ export default function Dashboard() {
 										<div className='card-body'>
 											<div className='text-center card-font-size'>
 												Out of Stock
+												<br /> <b>{outOfStock}</b>
 											</div>
 										</div>
 									</div>

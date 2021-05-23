@@ -106,7 +106,8 @@ export const allOrders = () => async dispatch => {
 	}
 };
 
-// update order
+// update 
+//**************** Update Order (admin) ****************//
 export const updateOrder = (id, orderData) => async dispatch => {
 	try {
 		dispatch({ type: UPDATE_ORDER_REQUEST });
