@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getAdminProducts } from '../../actions/productActions';
 import { allOrders } from '../../actions/orderActions';
+import { allUsers } from '../../actions/userActions';
 
 export default function Dashboard() {
 	//**************** variables ****************//
 	const dispatch = useDispatch();
 	const { products } = useSelector(state => state.products);
+	const { users } = useSelector(state => state.allUsers);
 	const { orders, totalAmount, loading } = useSelector(state => state.allOrders);
 	
 	//**************** functions ****************//
@@ -27,6 +29,7 @@ export default function Dashboard() {
 	useEffect(() => {
 		dispatch(getAdminProducts());
 		dispatch(allOrders());
+		dispatch(allUsers());
 
 	}, [dispatch]);
 	return (
@@ -110,6 +113,7 @@ export default function Dashboard() {
 										<div className='card-body'>
 											<div className='text-center card-font-size'>
 												Users
+												<br /> <b>{users && users.length}</b>
 											</div>
 										</div>
 										<Link

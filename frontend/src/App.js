@@ -30,6 +30,8 @@ import NewProduct from './components/admin/NewProduct';
 import UpdateProduct from './components/admin/UpdateProduct';
 import OrdersList from './components/admin/OrdersList';
 import ProcessOrder from './components/admin/ProcessOrder';
+import UsersList from './components/admin/UsersList';
+import UpdateUser from './components/admin/UpdateUser';
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
@@ -144,6 +146,18 @@ function App() {
 					path='/admin/order/:id'
 					isAdmin={true}
 					component={ProcessOrder}
+					exact
+				/>
+				<ProtectedRoute
+					path='/admin/users'
+					isAdmin={true}
+					component={UsersList}
+					exact
+				/>
+				<ProtectedRoute
+					path='/admin/user/:id'
+					isAdmin={true}
+					component={UpdateUser}
 					exact
 				/>
 				{!loading && (!isAuthenticated || user.role !== 'admin') && (

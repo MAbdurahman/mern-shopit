@@ -16,7 +16,6 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 		crop: 'scale',
 	});
 
-	console.log(req.body);
 
 	const { name, email, password } = req.body;
 
@@ -292,8 +291,8 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 	}
 
 	// Remove avatar from cloudinary
-	/*  const image_id = user.avatar.public_id;
-    await cloudinary.v2.uploader.destroy(image_id); */
+	const image_id = user.avatar.public_id;
+	await cloudinary.v2.uploader.destroy(image_id);
 
 	await user.remove();
 
