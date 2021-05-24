@@ -8,8 +8,8 @@ import Sidebar from './Sidebar';
 
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { allUsers, clearErrors } from '../../actions/userActions';
-// import { DELETE_USER_RESET } from '../../constants/userConstants';
+import { allUsers, deleteUser, clearErrors } from '../../actions/userActions';
+import { DELETE_USER_RESET } from '../../constants/userConstants';
 
 export default function UsersList({ history }) {
 	//**************** variables ****************//
@@ -17,7 +17,7 @@ export default function UsersList({ history }) {
 	const dispatch = useDispatch();
 
 	const { loading, error, users } = useSelector(state => state.allUsers);
-	// const { isDeleted } = useSelector(state => state.user);
+	const { isDeleted } = useSelector(state => state.user);
 	//**************** functions ****************//
 	useEffect(() => {
 		dispatch(allUsers());
@@ -27,16 +27,16 @@ export default function UsersList({ history }) {
 			dispatch(clearErrors());
 		}
 
-		/* 		if (isDeleted) {
+		if (isDeleted) {
 			alert.success('User deleted successfully');
 			history.push('/admin/users');
-			dispatch({ type: DELETE_USER_RESET }); 
-		} 
-       */
-	}, [dispatch, alert, error, history]);
+			dispatch({ type: DELETE_USER_RESET });
+		}
+
+	}, [dispatch, alert, error, isDeleted, history]);
 
 	const deleteUserHandler = id => {
-		// dispatch(deleteUser(id));
+		dispatch(deleteUser(id));
 	};
 
 	const setUsers = () => {
