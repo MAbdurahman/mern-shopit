@@ -18,6 +18,9 @@ import {
 	UPDATE_USER_SUCCESS,
 	UPDATE_USER_RESET,
 	UPDATE_USER_FAIL,
+	ALL_USERS_REQUEST,
+	ALL_USERS_SUCCESS,
+	ALL_USERS_FAIL,
 	DELETE_USER_REQUEST,
 	DELETE_USER_SUCCESS,
 	DELETE_USER_RESET,
@@ -187,6 +190,39 @@ export const forgotPasswordReducer = (state = {}, action) => {
 
 		case FORGOT_PASSWORD_FAIL:
 		case NEW_PASSWORD_FAIL:
+			return {
+				...state,
+				loading: false,
+				error: action.payload,
+			};
+
+		case CLEAR_ERRORS:
+			return {
+				...state,
+				error: null,
+			};
+
+		default:
+			return state;
+	}
+};
+
+export const allUsersReducer = (state = { users: [] }, action) => {
+	switch (action.type) {
+		case ALL_USERS_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+
+		case ALL_USERS_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				users: action.payload,
+			};
+
+		case ALL_USERS_FAIL:
 			return {
 				...state,
 				loading: false,
