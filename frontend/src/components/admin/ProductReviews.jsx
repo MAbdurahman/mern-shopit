@@ -21,7 +21,7 @@ export default function ProductReviews() {
 	const alert = useAlert();
 	const dispatch = useDispatch();
 
-	const { error, reviews } = useSelector(state => state.productReviews);
+	const { loading, error, reviews } = useSelector(state => state.productReviews);
 	const { isDeleted, error: deleteError } = useSelector(state => state.review);
 	//**************** functions ****************//
       useEffect(() => {
@@ -142,8 +142,11 @@ export default function ProductReviews() {
 								</form>
 							</div>
 						</div>
+                  { loading ? (
+                     <Loader />
+                  ) :
+						(reviews && reviews.length > 0 ? (
 
-						{reviews && reviews.length > 0 ? (
 							<MDBDataTable
 								data={setReviews()}
 								className='px-3'
@@ -153,7 +156,7 @@ export default function ProductReviews() {
 							/>
 						) : (
 							<p className='mt-5 text-center'>No Reviews.</p>
-						)}
+						))}
 					</Fragment>
 				</div>
 			</div>

@@ -36,6 +36,7 @@ const reducers = combineReducers({
 	productDetails: productDetailsReducer,
 	newProduct: newProductReducer,
 	productReviews: productReviewsReducer,
+	review: reviewReducer,
 	product: productReducer,
 	auth: authReducer,
 	user: userReducer,
@@ -49,7 +50,6 @@ const reducers = combineReducers({
 	orderDetails: orderDetailsReducer,
 	order: orderReducer,
 	newReview: newReviewReducer,
-	review: reviewReducer,
 });
 const middleware = [thunk];
 let initialState = {

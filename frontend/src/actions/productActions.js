@@ -213,7 +213,7 @@ export const getProductReviews = id => async dispatch => {
 	}
 };
 
-//**************** deleteReview ****************//
+//**************** deleteProductReview ****************//
 export const deleteReview = (id, productId) => async dispatch => {
 	try {
 		dispatch({ type: DELETE_REVIEW_REQUEST });
@@ -227,7 +227,7 @@ export const deleteReview = (id, productId) => async dispatch => {
 			payload: data.success,
 		});
 	} catch (error) {
-		console.log(error.response);
+		// console.log(error.response);
 
 		dispatch({
 			type: DELETE_REVIEW_FAIL,
