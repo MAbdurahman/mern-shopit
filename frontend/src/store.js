@@ -8,7 +8,9 @@ import {
 	productDetailsReducer,
 	newReviewReducer,
 	newProductReducer,
-	productReducer
+	productReducer,
+	productReviewsReducer,
+	reviewReducer,
 } from './reducers/productReducers';
 
 import {
@@ -33,6 +35,7 @@ const reducers = combineReducers({
 	products: productsReducer,
 	productDetails: productDetailsReducer,
 	newProduct: newProductReducer,
+	productReviews: productReviewsReducer,
 	product: productReducer,
 	auth: authReducer,
 	user: userReducer,
@@ -46,6 +49,7 @@ const reducers = combineReducers({
 	orderDetails: orderDetailsReducer,
 	order: orderReducer,
 	newReview: newReviewReducer,
+	review: reviewReducer,
 });
 const middleware = [thunk];
 let initialState = {
